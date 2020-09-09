@@ -1,0 +1,71 @@
+'''
+Created on Sep 4, 2020
+Program shows the current bus schedule as well as the pricing options.
+
+INPUT
+    1.School start hour
+    2.School start minute
+    3.Stop Number
+
+PROGRAM DATA
+    1.Bus fee is $1 plus 15 cents for each full 4 minute interval spent traveling from the stop to school
+    2.User is not charged for the waiting time at the stop the user gets in
+    
+    
+OUTPUT
+    1. The arrival and departure time for the stop. T
+    2. The length of the trip (not including the wait time at the stop from which the student departs to
+    school)
+    3. The cost of the ticket in dollars.
+    
+@author: levrosenzweig-ziff
+'''
+
+#1. Get the inputs 
+#    1.1 Get school hour input
+SchoolStartHour = eval(input("Please enter the hour school starts"))
+#    1.2 Get school minute input
+SchoolStartMinute = eval(input("Please enter the minute school starts"))
+#    1.3 Convert school start time into minutes
+SchoolStartTime = SchoolStartHour * 60 + SchoolStartMinute
+#    print(SchoolStartTime)
+
+#    1.4 Get the inputs of the stop number
+StopNumber = eval(input("Please enter your stop number"))
+#    1.5 Print stop number to check that expression is correct
+#    print(StopNumber)
+
+#2. calculate arrival time
+#    2.1 Calculate arrival time of the first stop
+FirstStopArrivalTime = SchoolStartTime - 45
+#    2.2 Calculate arrival time for user inputed stop
+InputStopArrivalTimeMinutes = (StopNumber-1) * (3+2)
+InputStopArrivalTime = (InputStopArrivalTimeMinutes + SchoolStartTime)//60
+#    2.3 Calculate departure time for inputed stop
+InputStopDepartureMinutes = (InputStopArrivalTimeMinutes + SchoolStartTime)%60
+#    2.4 Calculate stop wait time
+StopWaitingPeriod = InputStopDepartureMinutes + 2
+#    2.5 Print calculations to check that the numbers are correct
+#    print(InputStopArrivalTime)
+#    print(FinalStopMinutes)
+#    print(StopWaitingPeriod)
+
+#3. Output responses from inputs
+#    3.1 Show the arrival and departure time for the inputed stop number
+ArrivalandDepartureTime = "The bus will be at stop number " + str(StopNumber) + " between " + str(SchoolStartHour) + ":" + str(InputStopDepartureMinutes) + " and " + str(SchoolStartHour) + ":" + str(StopWaitingPeriod)
+print(ArrivalandDepartureTime)
+
+#    3.2Calculate time remaining to school
+TripTimeRemaining = (45-InputStopArrivalTimeMinutes) - 2
+#    3.3 Check calculation by printing TripTimeRemaining
+#    print(TripTimeRemaining)
+#    3.4 Show the length of the trip
+TripLength = "The length of of the trip from stop number " + str(StopNumber) + " is " + str(TripTimeRemaining) +  " minutes"
+print(TripLength)
+#    3.5 Calculates ticket cost
+TicketCost = ((TripTimeRemaining//4)*15+100)/100
+#    3.6 Print TicketCost to check calculation
+#    print(TicketCost)
+#    3.7 Show the price of the ticket
+TripPrice = "The cost of the ticket from stop number " + str(StopNumber) + " is $" + str(TicketCost)
+print(TripPrice)
